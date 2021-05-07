@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "example"
+version = "0.1.0"
+description = ""
+authors = ["Ivan Dmitriesvkii <ivan.dmitrievskii@semrush.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.63.0"
+uvicorn = "^0.13.4"
+tortoise-orm = {extras = ["asyncpg"], version = "^0.17.2"}
+eventual = {path = "../eventual", develop = true}
+eventual-rmq = {path = "../eventual-rmq", develop = true}
+eventual-tortoise = {path = "../eventual-tortoise", develop = true}
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+poetry-dev = "^0.1.3"
+black = "^21.5b0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
