@@ -1,6 +1,6 @@
 import logging
 from types import ModuleType
-from typing import Dict, Iterable, Optional, Union, Callable
+from typing import Any, AsyncGenerator, Callable, Dict, Iterable, Optional, Union
 
 from tortoise import Tortoise
 
@@ -27,7 +27,7 @@ def tortoise_lifespan(
         await Tortoise.close_connections()
         logging.info("Tortoise-ORM shutdown")
 
-    async def lifespan(_):
+    async def lifespan(ctx: Any) -> AsyncGenerator[Any, None]:
         await init_orm()
         yield
         await close_orm()

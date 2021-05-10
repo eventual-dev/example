@@ -1,6 +1,5 @@
+from eventual.event_store import EventSendStore
 from fastapi import APIRouter, Depends
-
-from eventual.dispatch.abc import EventSendStore
 
 from example.app.payment_case import pay
 from example.rest import event_send_store_factory
@@ -16,5 +15,5 @@ async def create_unit(
     event_send_store: EventSendStore = Depends(
         event_send_store_factory.create_event_send_store
     ),
-):
+) -> None:
     await pay(event_send_store)

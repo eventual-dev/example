@@ -2,10 +2,9 @@ import dataclasses
 import uuid
 from typing import Type, TypeVar
 
-from eventual.model import Event, Entity
+from eventual.model import Entity, Event
 
-P = TypeVar("P", bound="Plan")
-F = TypeVar("F", bound="Feature")
+P = TypeVar("P", bound="Person")
 
 
 @dataclasses.dataclass(frozen=True)
@@ -32,7 +31,7 @@ class Person(Entity[uuid.UUID]):
     def from_name(cls: Type[P], name: str) -> P:
         return cls._create(unique_id=uuid.uuid4(), name=name)
 
-    def pay(self):
+    def pay(self) -> None:
         self._outbox.append(PaymentRequested())
         self._outbox.append(PaymentApproved())
         self._outbox.append(PaymentSucceeded())
