@@ -12,9 +12,9 @@ from eventual_tortoise.event_store import (
 from fastapi import APIRouter, FastAPI
 
 from example import configuration
-from example.ls import tortoise_lifespan
 from example.registry import eventual_registry
 from example.rest import event_send_store_factory, person
+from example.tortoise_hack import tortoise_lifespan
 
 
 def build_router() -> APIRouter:
@@ -42,7 +42,7 @@ def get_app() -> FastAPI:
                     use_tz=False,
                     timezone="UTC",
                 ),
-                generate_schemas=True,
+                # generate_schemas=True,
             )
         )
         eventual_context = asynccontextmanager(
